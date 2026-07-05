@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: telemetry-db
+    environment:
+      MYSQL_DATABASE: telemetry
+      MYSQL_USER: telemetry_user
+      MYSQL_PASSWORD: telemetry_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
