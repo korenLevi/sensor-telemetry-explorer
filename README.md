@@ -17,7 +17,9 @@ docker compose exec backend python manage.py load_csv /data/telemetry_clean.csv
 ```
 Place the provided CSV at `data/telemetry.csv` before loading.
 
-Tests: `docker compose exec backend python manage.py test`
+## Running tests
+Backend: docker compose exec backend python manage.py test
+Frontend: cd frontend && npm install && npm test
 
 ## Key decisions
 \
@@ -62,3 +64,4 @@ each page local state and clear it on unmount instead.
 - Frontend tests (Vitest + React Testing Library).
 - Precomputed hourly rollups for the summary endpoint at larger scale.
 ```
+

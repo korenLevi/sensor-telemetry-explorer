@@ -85,7 +85,6 @@ export const ReadingsTable = ({
   onPageChange,
   onPageSizeChange,
 }) => {
-
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {loading && <LinearProgress />}
@@ -119,15 +118,16 @@ export const ReadingsTable = ({
           </TableBody>
         </Table>
       </TableContainer>
-
-      <Pagination
-        totalCount={totalCount}
-        page={page}
-        pageSize={pageSize}
-        totalPages={totalPages}
-        onPageChange={onPageChange}
-        onPageSizeChange={onPageSizeChange}
-      />
+      {totalCount > 0 && (
+        <Pagination
+          totalCount={totalCount}
+          page={page}
+          pageSize={pageSize}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+          onPageSizeChange={onPageSizeChange}
+        />
+      )}
     </Paper>
   );
 };

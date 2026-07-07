@@ -4,8 +4,12 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/setupTests.js",
+  },
   server: {
-    // Needed for file watching inside Docker on macOS
     watch: {
       usePolling: true,
     },
