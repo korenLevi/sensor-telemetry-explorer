@@ -30,8 +30,6 @@ class Reading(models.Model):
     unit = models.CharField(max_length=10)
     recorded_at = models.DateTimeField()
     status = models.CharField(max_length=10, choices=Status.choices)
-    # Set by the offline pandas cleaning step (scripts/clean_csv.py) for
-    # values outside the plausible physical range of their metric.
     is_out_of_range = models.BooleanField(default=False)
 
     class Meta:

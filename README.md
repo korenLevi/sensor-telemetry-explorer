@@ -22,8 +22,7 @@ Tests: `docker compose exec backend python manage.py test`
 ## Key decisions
 \
 **Keep it simple.** Plain Django MVT (no DRF) is enough for three read-only
-JSON endpoints — I come from Laravel, so this is the way of organizing things
-I'm comfortable and productive with.
+JSON endpoints — I come from Laravel, so this is the way of organizing things I'm comfortable and productive with.
 
 **Data pipeline.** pandas is used for offline batch cleaning only — never in
 the live request path:
@@ -31,12 +30,6 @@ the live request path:
 ```
 telemetry.csv ──(clean_csv.py, pandas)──▶ telemetry_clean.csv ──(load_csv)──▶ MySQL
 ```
-
-The cleaning step dedupes, coerces types, normalizes to UTC and flags
-out-of-range values; the loader inserts in 10k batches with `bulk_create`.
-
-**Performance.** Composite indexes on `(asset_id, -recorded_at)` and
-`(metric, -recorded_at)` match the query patterns (filter + order by time).
 
 **Frontend: smart/dumb components.** Pages are the smart components — they own
 fetching and state and pass everything down as props. Components (`Table`,
@@ -50,6 +43,9 @@ carries over to the other. That's a deliberate product choice (and shows real
 Context usage). If the requirement were "each page starts clean", I'd give
 each page local state and clear it on unmount instead.
 
+**Performance.** Composite indexes on `(asset_id, -recorded_at)` and
+`(metric, -recorded_at)` match the query patterns (filter + order by time).s
+
 ## Edge cases
 
 - Huge page numbers — clamped to the last page (tested); `page_size` capped at 200.
@@ -58,9 +54,6 @@ each page local state and clear it on unmount instead.
   ETL/load stage, not at query time.
 - Faulted readings — kept and filterable by status.
 
-## Stretch attempted
-
-pandas ETL step (`backend/scripts/clean_csv.py`) — kept strictly offline/batch.
 
 ## With more time
 

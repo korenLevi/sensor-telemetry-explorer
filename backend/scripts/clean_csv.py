@@ -1,20 +1,13 @@
-# Cleans the raw telemetry CSV before loading it into the database.
-# pandas is used here for offline/batch work only — live API queries go
-# through the Django ORM, not through pandas.
-#
-# Run once, from the backend folder:
-#   python scripts/clean_csv.py
-
 import pandas as pd
 
 INPUT = "../data/telemetry.csv"
 OUTPUT = "../data/telemetry_clean.csv"
 
 PLAUSIBLE_RANGES = {
-    "flow_rate":   (0, 150),   # m3/h
-    "pressure":    (0, 15),    # bar
-    "energy_kwh":  (0, 100),   # kWh
-    "water_level": (0, 30),    # m
+    "flow_rate": (0, 150),
+    "pressure": (0, 15),
+    "energy_kwh": (0, 100),
+    "water_level": (0, 30),
 }
 
 df = pd.read_csv(INPUT)
