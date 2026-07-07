@@ -18,5 +18,6 @@ data/*.csv
 .vscode/
 .idea/
 
+
 # Assignment brief (not part of the submitted code)
 home-assignment-candidate.pdf

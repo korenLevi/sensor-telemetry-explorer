@@ -20,7 +20,7 @@ Place the provided CSV at `data/telemetry.csv` before loading.
 Tests: `docker compose exec backend python manage.py test`
 
 ## Key decisions
-
+\
 **Keep it simple.** Plain Django MVT (no DRF) is enough for three read-only
 JSON endpoints — I come from Laravel, so this is the way of organizing things
 I'm comfortable and productive with.
